@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PIXEL FOUNDRY</title>
+  <meta name="description" content="Pixel Foundry crafts digital experiences, one pixel at a time.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --front: #C15247;
+      --back: #F2C495;
+      --personal: #50E3C2;
+      --job: #F8E71C;
+      --oss: #D3DDF7;
+      --footer-bg: #e6e6dd;
+      --bg-color: #f4f4eb;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes tooltipFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    html, body {
+      min-height: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      overflow-x: hidden;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="fill:none;stroke:black;stroke-width:2px;"><rect width="12" height="12"/></svg>') 8 8, auto;
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      font-size: 21px;
+      line-height: 1.725;
+      letter-spacing: -0.025em;
+      color: #4a4a4a;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" fill-opacity="0.05"/></svg>');
+    }
+
+    .wrap {
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    article {
+      max-width: 800px;
+      width: 100%;
+      padding: 2rem;
+    }
+
+    h1, h2 {
+      color: var(--front);
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 1.5em;
+      font-size: 3rem;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 1em 0;
+    }
+
+    a {
+      position: relative;
+      display: inline-block;
+      color: #485fc7;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    a:hover {
+      color: var(--front);
+    }
+
+    a.hilite:after {
+      position: absolute;
+      display: block;
+      border-radius: 50%;
+      content: " ";
+      width: 2em;
+      height: 2em;
+      left: 50%;
+      margin: -1.75em 0 0 -1em;
+      opacity: 0.08;
+      transition: all 0.3s ease-in-out;
+    }
+
+    a.hilite:hover:after {
+      opacity: 0.5;
+    }
+
+    a.personal:after { background-color: var(--personal); }
+    a.job:after { background-color: var(--job); }
+    a.oss:after { background-color: var(--oss); }
+
+    .principles {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .principle {
+      padding: 1rem;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      font-size: 1.25rem; /* Slightly larger than body text */
+    }
+
+    .principle:hover {
+      background-color: rgba(255,255,255,0.2);
+      transform: translateY(-5px);
+    }
+
+    .principle strong {
+      color: var(--front);
+    }
+
+    .app-icons {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .app-icon {
+      width: 100px;
+      height: 100px;
+      background-color: var(--back);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--front);
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .app-icon:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .app-icon svg {
+      width: 50%;
+      height: 50%;
+      fill: var(--front);
+    }
+
+    footer {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--footer-bg);
+      color: #888;
+      font-family: 'Work Sans', sans-serif;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    footer span {
+      transition: all 0.3s ease-in-out;
+    }
+
+    footer:hover span {
+      color: var(--front);
+      transform: scale(1.1);
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #4a4a4a;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      white-space: nowrap;
+      max-width: 90vw;
+    }
+
+    footer:hover .tooltip {
+      opacity: 1;
+      animation: tooltipFade 0.3s ease-out;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    @media screen and (max-width: 600px) {
+      article {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      p, .principle {
+        font-size: 1rem;
+      }
+
+      .app-icons {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article>
+      <h1 class="fade-in">PIXEL FOUNDRY</h1>
+      <p class="fade-in">We craft digital experiences, <a class="hilite personal">one pixel at a time</a>. Founded on the belief that <a class="hilite job">simplicity and purpose</a> are the cornerstones of great software, we create <a class="hilite oss">apps that resonate</a>.</p>
+      <p class="fade-in">Our approach is grounded in three principles:</p>
+      <div class="principles fade-in">
+        <div class="principle">
+          <strong>🔍 Clarity:</strong> We distill complex ideas into intuitive interfaces.
+        </div>
+        <div class="principle">
+          <strong>🎯 Purpose:</strong> Every feature serves a clear function.
+        </div>
+        <div class="principle">
+          <strong>🛠️ Craft:</strong> We code with care, design with intent.
+        </div>
+      </div>
+      <p class="fade-in">In a world of endless features, we choose <a class="hilite job">focus</a>. Our apps are built with <a class="hilite personal">joy</a>, meant to be used with joy. We believe that when you strip away the unnecessary, what remains is beautiful.</p>
+
+      <h2 class="fade-in">Our Creations</h2>
+      <div class="app-icons fade-in">
+        <div class="app-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div class="app-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="app-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+            <line x1="6" y1="1" x2="6" y2="4"></line>
+            <line x1="10" y1="1" x2="10" y2="4"></line>
+            <line x1="14" y1="1" x2="14" y2="4"></line>
+          </svg>
+        </div>
+      </div>
+
+      <p class="fade-in">
+        hello <em>[at]</em> pixelfoundry.design
+        <br>
+        <a>@pixelfoundry</a>
+      </p>
+    </article>
+  </div>
+
+  <footer>
+    Crafted with <span>❤️</span> in Ireland
+    <div class="tooltip">Did you know? Pixel Foundry was originally founded as Thermo-Apps by Jack Leonard in 2011☘️🔥</div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const links = document.querySelectorAll('a.hilite');
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          link.style.transform = 'scale(1.05)';
+        });
+        link.addEventListener('mouseleave', () => {
+          link.style.transform = 'scale(1)';
+        });
+      });
+
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+          }
+        });
+      });
+
+      fadeElements.forEach(el => observer.observe(el));
+
+      const footer = document.querySelector('footer');
+      let touchTimer;
+      footer.addEventListener('touchstart', () => {
+        touchTimer = setTimeout(() => {
+          footer.querySelector('.tooltip').style.opacity = '1';
+        }, 500);
+      });
+      footer.addEventListener('touchend', () => {
+        clearTimeout(touchTimer);
+        setTimeout(() => {
+          footer.querySelector('.tooltip').style.opacity = '0';
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
